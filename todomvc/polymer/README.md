@@ -42,3 +42,8 @@ Polymer and its polyfills are intended to work in the latest version of [evergre
      `python -m SimpleHTTPServer`
 
 1. Browse to the server root
+
+
+
+vulcanize --inline index.html
+cat vulcanized.html | crisper -h build.html -j build.js
