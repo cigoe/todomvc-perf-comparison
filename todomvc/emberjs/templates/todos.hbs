@@ -3,7 +3,7 @@
     <h1>todos</h1>
     {{input id="new-todo" type="text" value=newTitle enter="createTodo" placeholder="What needs to be done?"}}
   </header>
-  {{#if length}}
+  {{#if filteredTodos}}
     <section id="main">
       <ul id="todo-list">
         {{#each filteredTodos as |item|}}

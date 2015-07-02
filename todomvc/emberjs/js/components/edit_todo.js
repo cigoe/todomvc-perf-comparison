@@ -3,13 +3,6 @@
 
 var EditTodo = Ember.TextField.extend({
 
-  focusOnInsert: function () {
-    // Re-set input value to get rid of a reduntant text selection
-    this.$().val(this.$().val());
-    this.$().focus();
-  }.on('didInsertElement'),
-
-
   doneEditing: function () {
     var bufferedTitle = this.get('bufferedTitle').trim();
 
@@ -27,13 +20,17 @@ var EditTodo = Ember.TextField.extend({
     }
 
     // Re-set our newly edited title to persist its trimmed version
-    this.set('bufferedTitle', bufferedTitle);
-    this.set('isEditing', false);
+    this.setProperties({
+      bufferedTitle: bufferedTitle,
+      isEditing: false
+    });
   },
 
   cancelEditing: function () {
-    this.set('bufferedTitle', this.get('title'));
-    this.set('isEditing', false);
+    this.setProperties({
+      bufferedTitle: this.get('title'),
+      isEditing: false
+    });
   },
 
   removeTodo: function () {

@@ -425,7 +425,7 @@ Ember.TEMPLATES['todos'] = Ember.HTMLBars.template((function() {
     },
     statements: [
       ["inline","input",[],["id","new-todo","type","text","value",["subexpr","@mut",[["get","newTitle"]],[]],"enter","createTodo","placeholder","What needs to be done?"]],
-      ["block","if",[["get","length"]],[],0,null],
+      ["block","if",[["get","filteredTodos"]],[],0,null],
       ["content","remaining.length"],
       ["inline","pluralize",["item",["get","remaining.length"]],[]],
       ["block","link-to",["todos.index"],["activeClass","selected"],1,null],

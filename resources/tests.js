@@ -58,34 +58,31 @@ Suites.push({
     },
     tests: [
         new BenchmarkTestStep('Adding' + numberOfItemsToAdd + 'Items', function (params, contentWindow) {
-            params.emberRun(function () {
-                for (var i = 0; i < numberOfItemsToAdd; i++) {
-                    params.emberRun(function () {
-                        params.newTodo.value = 'Something to do ' + i;
-                    });
-
+            for (var i = 0; i < numberOfItemsToAdd; i++) {
+                params.emberRun(function () {
+                    params.newTodo.value = 'Something to do ' + i;
                     var keyupEvent = document.createEvent('Event');
                     keyupEvent.initEvent('keyup', true, true);
                     keyupEvent.keyCode = 13;
                     params.newTodo.dispatchEvent(keyupEvent);
-                }
-            });
+                });
+            }
         }),
         new BenchmarkTestStep('CompletingAllItems', function (params, contentWindow, contentDocument) {
-            params.emberRun(function () {
-                var checkboxes = contentDocument.querySelectorAll('.ember-checkbox');
-                for (var i = 0; i < checkboxes.length; i++) {
-                    params.$(checkboxes[i]).trigger('click');
-                }
-            });
+            var checkboxes = contentDocument.querySelectorAll('.ember-checkbox');
+            for (var i = 0; i < checkboxes.length; i++) {
+                params.emberRun(function () {
+                    checkboxes[i].click();
+                });
+            }
         }),
         new BenchmarkTestStep('DeletingItems', function (params, contentWindow, contentDocument) {
-            params.emberRun(function () {
-                var deleteButtons = contentDocument.querySelectorAll('.destroy');
-                for (var i = 0; i < deleteButtons.length; i++) {
-                    params.$(deleteButtons[i]).trigger('click');
-                }
-            });
+            var deleteButtons = contentDocument.querySelectorAll('.destroy');
+            for (var i = 0; i < deleteButtons.length; i++) {
+                params.emberRun(function () {
+                    deleteButtons[i].click();
+                });
+            }
         })
     ]
 });

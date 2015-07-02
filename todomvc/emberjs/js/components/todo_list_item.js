@@ -56,6 +56,7 @@ var TodoListItem = Ember.Component.extend({
   saveWhenCompleted: function () {
     this.get('item').save();
   }.observes('isCompleted')
+
 });
 
 Ember.Application.initializer({

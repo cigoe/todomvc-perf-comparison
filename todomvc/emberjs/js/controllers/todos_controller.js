@@ -7,7 +7,6 @@ Todos.TodosController = Ember.Controller.extend({
 
   remaining: Ember.computed.filterBy('filteredTodos', 'isCompleted', false),
   completed: Ember.computed.filterBy('filteredTodos', 'isCompleted', true),
-  length: Ember.computed.alias('filteredTodos.length'),
 
   actions: {
      createTodo: function () {
