@@ -39,7 +39,7 @@ Suites.push({
 Suites.push({
     name: 'Ember',
     url: 'todomvc/emberjs/index.html',
-    version: '1.4.0 + Handlebars 1.3.0',
+    version: '1.13.2 (htmlbars)',
     prepare: function (runner, contentWindow, contentDocument) {
         contentWindow.Todos.Store = contentWindow.DS.Store.extend({
             revision: 12,
@@ -51,34 +51,41 @@ Suites.push({
             element.focus();
             return {
                 newTodo: element,
-                views: contentWindow.Ember.View.views,
-                emberRun: contentWindow.Ember.run
+                emberRun: contentWindow.Ember.run,
+                $: contentWindow.Ember.$
             }
         });
     },
     tests: [
         new BenchmarkTestStep('Adding' + numberOfItemsToAdd + 'Items', function (params, contentWindow) {
-            for (var i = 0; i < numberOfItemsToAdd; i++) {
-                params.emberRun(function () { params.views["new-todo"].set('value', 'Something to do' + i); });
-                params.emberRun(function () {
+            params.emberRun(function () {
+                for (var i = 0; i < numberOfItemsToAdd; i++) {
+                    params.emberRun(function () {
+                        params.newTodo.value = 'Something to do ' + i;
+                    });
+
                     var keyupEvent = document.createEvent('Event');
                     keyupEvent.initEvent('keyup', true, true);
                     keyupEvent.keyCode = 13;
-                    params.newTodo.dispatchEvent(keyupEvent)
-                });
-            }
+                    params.newTodo.dispatchEvent(keyupEvent);
+                }
+            });
         }),
         new BenchmarkTestStep('CompletingAllItems', function (params, contentWindow, contentDocument) {
-            var checkboxes = contentDocument.querySelectorAll('.ember-checkbox');
-            for (var i = 0; i < checkboxes.length; i++) {
-                var view = params.views[checkboxes[i].id];
-                params.emberRun(function () { view.set('checked', true); });
-            }
+            params.emberRun(function () {
+                var checkboxes = contentDocument.querySelectorAll('.ember-checkbox');
+                for (var i = 0; i < checkboxes.length; i++) {
+                    params.$(checkboxes[i]).trigger('click');
+                }
+            });
         }),
         new BenchmarkTestStep('DeletingItems', function (params, contentWindow, contentDocument) {
-            var deleteButtons = contentDocument.querySelectorAll('.destroy');
-            for (var i = 0; i < deleteButtons.length; i++)
-                params.emberRun(function () { deleteButtons[i].click(); });
+            params.emberRun(function () {
+                var deleteButtons = contentDocument.querySelectorAll('.destroy');
+                for (var i = 0; i < deleteButtons.length; i++) {
+                    params.$(deleteButtons[i]).trigger('click');
+                }
+            });
         })
     ]
 });

@@ -9,19 +9,6 @@ Todos.TodosController = Ember.Controller.extend({
   completed: Ember.computed.filterBy('filteredTodos', 'isCompleted', true),
   length: Ember.computed.alias('filteredTodos.length'),
 
-  allAreDone: Ember.computed('length', 'completed.length', {
-    set: function(key, value) {
-      this.setEach('isCompleted', value);
-      return value;
-    },
-    get: function() {
-      var length = this.get('length');
-      var completedLength = this.get('completed.length');
-
-      return length > 0 && length === completedLength;
-    }
-  }),
-
   actions: {
      createTodo: function () {
        var title, todo;
