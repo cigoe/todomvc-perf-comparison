@@ -1,7 +1,7 @@
 /*global Todos, Ember */
 'use strict';
 
-Todos.TodoController = Ember.ObjectController.extend({
+Todos.TodoController = Ember.Controller.extend({
 	isEditing: false,
 
 	// We use the bufferedTitle to store the original value of
