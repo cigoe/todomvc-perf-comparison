@@ -10,7 +10,7 @@ SimplePromise.prototype.then = function (callback) {
         throw "SimplePromise doesn't support multiple calls to then";
     this._callback = callback;
     this._chainedPromise = new SimplePromise;
-    
+
     if (this._resolved)
         this.resolve(this._resolvedValue);
 
@@ -42,6 +42,26 @@ function BenchmarkRunner(suites, client) {
     this._prepareReturnValue = null;
     this._measuredValues = {};
     this._client = client;
+}
+
+BenchmarkRunner.prototype.waitForShadowElement = function (selector, shadowSelector) {
+    var promise = new SimplePromise;
+    var contentDocument = this._frame.contentDocument;
+
+    function resolveIfReady() {
+        var element = contentDocument.querySelector(selector);
+        var shadowElm = null;
+        if (element) {
+            shadowElm = element.shadowRoot && element.shadowRoot.querySelector(shadowSelector);
+            if (shadowElm) {
+                return promise.resolve(shadowElm);
+            }
+        }
+        setTimeout(resolveIfReady, 50);
+    }
+
+    resolveIfReady();
+    return promise;
 }
 
 BenchmarkRunner.prototype.waitForElement = function (selector) {

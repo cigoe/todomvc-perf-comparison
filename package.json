@@ -1,0 +1,23 @@
+{
+  "name": "todomvc-perf-comparison",
+  "version": "1.0.0",
+  "description": "Both Mercury and Elm are based on the [virtual-dom][] project which appears to be extremely fast.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/evancz/todomvc-perf-comparison"
+  },
+  "author": "Paul Grenier <pgrenier@gmail.com> (http://autosponge.github.io/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/evancz/todomvc-perf-comparison/issues"
+  },
+  "homepage": "https://github.com/evancz/todomvc-perf-comparison",
+  "devDependencies": {
+    "http-server": "^0.8.0"
+  }
+}

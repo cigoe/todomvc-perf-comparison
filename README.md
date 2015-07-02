@@ -11,6 +11,10 @@ browsers!
 Here are some sample results from running this in Chrome 35 with OSX 10.9.4 on
 a Macbook Air:
 
-[![Sample results for Chrome 35 + OSX 10.9.4 on a Macbook Air](sampleResults.png)][runner]
+##Chrome
+![Chrome + OSX on a Macbook Air](chrome.png)]
 
-[runner]: http://evancz.github.io/todomvc-perf-comparison/
+##Safari
+
+![Safari + OSX on a Macbook Air](safari.png)]
+
